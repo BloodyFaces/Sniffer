@@ -1,0 +1,29 @@
+﻿<Window x:Class="Sniffer.Views.CaptureView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ie="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:Sniffer.Views"
+        mc:Ignorable="d"
+        Title="CaptureView" Height="800" Width="1280">
+    <Grid>
+        <ListBox Name="List" Margin="10,10,10,373" ItemsSource="{Binding Packets}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Timeval}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ie:Interaction.Triggers>
+                <ie:EventTrigger EventName="SelectionChanged">
+                    <ie:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=List, Path=SelectedIndex}"/>
+                </ie:EventTrigger>
+            </ie:Interaction.Triggers>
+        </ListBox>
+        <Button Content="Start capturing" HorizontalAlignment="Left" Margin="819,401,0,0" VerticalAlignment="Top" Width="219" Height="70" Command="{Binding CaptureStartCommand}"/>
+        <Button Content="Stop capturing" HorizontalAlignment="Left" Margin="1043,401,0,0" VerticalAlignment="Top" Width="219" Height="70" Command="{Binding CaptureStopCommand}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,428,0,0" TextWrapping="Wrap" Text="{Binding Pack}" VerticalAlignment="Top" Height="277" Width="554"/>
+    </Grid>
+</Window>
