@@ -8,32 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Sniffer.Commands;
 using System.Windows;
+using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace Sniffer.ViewModels
 {
     class CaptureViewModel : ObservableObject
     {
         private Adapter adapter;
+        private Dispatcher dispatcher;
         private ObservableCollection<RawCapture> packets;
-        private string pack;
-
-        public string Pack
-        {
-            get { return pack; }
-            set
-            {
-                pack = value;
-                OnPropertyChanged("Pack");
-            }
-        }
 
         public CaptureViewModel(Adapter dev)
         {
+            dispatcher = Dispatcher.CurrentDispatcher;
             adapter = dev;
             packets = new ObservableCollection<RawCapture>();
             CaptureStartCommand = new RelayCommand(CaptureStartExecute, CaptureStartCanExecute);
             CaptureStopCommand = new RelayCommand(CaptureStopExecute, CaptureStopCanExecute);
-            Pack = "";
         }
 
         public ObservableCollection<RawCapture> Packets
@@ -68,13 +60,17 @@ namespace Sniffer.ViewModels
 
         private void CaptureStopExecute()
         {
+            adapter.Device.OnPacketArrival -= OnPacketArrival;
             adapter.Device.StopCapture();
             adapter.Device.Close();
         }
 
         private void OnPacketArrival(object sender, CaptureEventArgs e)
         {
-            packets.Add(e.Packet);
+            dispatcher.Invoke(new Action(() =>
+            {
+                packets.Add(e.Packet);
+            }));
         }
     }
 }

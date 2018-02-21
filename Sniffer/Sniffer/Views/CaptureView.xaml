@@ -12,7 +12,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Timeval}"/>
+                        <TextBlock Text="{Binding Data}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -24,6 +24,5 @@
         </ListBox>
         <Button Content="Start capturing" HorizontalAlignment="Left" Margin="819,401,0,0" VerticalAlignment="Top" Width="219" Height="70" Command="{Binding CaptureStartCommand}"/>
         <Button Content="Stop capturing" HorizontalAlignment="Left" Margin="1043,401,0,0" VerticalAlignment="Top" Width="219" Height="70" Command="{Binding CaptureStopCommand}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="32,428,0,0" TextWrapping="Wrap" Text="{Binding Pack}" VerticalAlignment="Top" Height="277" Width="554"/>
     </Grid>
 </Window>
