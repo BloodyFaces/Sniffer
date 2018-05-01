@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Sniffer"
              Startup="OnStartup">
     <Application.Resources>
-         
+        <ResourceDictionary Source="ExpressionDark.xaml"/>
     </Application.Resources>
 </Application>

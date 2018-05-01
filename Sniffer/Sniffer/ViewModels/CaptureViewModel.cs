@@ -10,6 +10,7 @@ using Sniffer.Commands;
 using System.Windows;
 using System.Windows.Threading;
 using System.ComponentModel;
+using PacketDotNet;
 
 namespace Sniffer.ViewModels
 {
@@ -17,18 +18,25 @@ namespace Sniffer.ViewModels
     {
         private Adapter adapter;
         private Dispatcher dispatcher;
-        private ObservableCollection<RawCapture> packets;
+        private ObservableCollection<Frame> packets;
+        private string details;
+        private int counter = 0;
+        private bool wasSelected;
+        private string hexDetails;
 
         public CaptureViewModel(Adapter dev)
         {
+            wasSelected = false;
+            SelectionChangedCommand = new RelayCommand<object>(SelectionChangedExecute);
             dispatcher = Dispatcher.CurrentDispatcher;
             adapter = dev;
-            packets = new ObservableCollection<RawCapture>();
+            packets = new ObservableCollection<Frame>();
             CaptureStartCommand = new RelayCommand(CaptureStartExecute, CaptureStartCanExecute);
             CaptureStopCommand = new RelayCommand(CaptureStopExecute, CaptureStopCanExecute);
+            CleanCommand = new RelayCommand(CleanExecute, CleanCanExecute);
         }
 
-        public ObservableCollection<RawCapture> Packets
+        public ObservableCollection<Frame> Packets
         {
             get { return packets; }
             set
@@ -37,6 +45,8 @@ namespace Sniffer.ViewModels
                 OnPropertyChanged("Packets");
             }
         }
+
+        public int SelectedIndex { get; set; }
 
         public RelayCommand CaptureStartCommand { get; set; }
         public RelayCommand CaptureStopCommand { get; set; }
@@ -69,8 +79,82 @@ namespace Sniffer.ViewModels
         {
             dispatcher.Invoke(new Action(() =>
             {
-                packets.Add(e.Packet);
+                try
+                {
+                    counter++;
+                    packets.Add(new Frame(e.Packet, counter));
+                }
+                catch (ArgumentOutOfRangeException exc)
+                {
+
+                }
             }));
+        }
+
+        public string Details
+        {
+            get { return details; }
+            set
+            {
+                details = value;
+                OnPropertyChanged("Details");
+            }
+        }
+
+        public string HexDetails
+        {
+            get { return hexDetails; }
+            set
+            {
+                hexDetails = value;
+                OnPropertyChanged("HexDetails");
+            }
+        }
+
+        public RelayCommand<object> SelectionChangedCommand { get; set; }
+        public RelayCommand DetailsCommand { get; set; }
+
+        public RelayCommand CleanCommand { get; set; }
+
+        private void SelectionChangedExecute(object param)
+        {
+            if (param is int)
+            {
+                int index = (int)param;
+                wasSelected = true;
+                SelectedIndex = index;
+                if (SelectedIndex == -1)
+                {
+                    Details = "";
+                    HexDetails = "";
+                }
+                else
+                { 
+                    Details = packets[SelectedIndex].Content;
+                    HexDetails = packets[SelectedIndex].HexContent;
+                }
+            }
+        }
+
+        private void DetailsExecute()
+        {
+
+        }
+
+        private bool DetailsCanExecute()
+        {
+            return wasSelected;
+        }
+
+        private void CleanExecute()
+        {
+            counter = 0;
+            packets.Clear();
+        }
+
+        private bool CleanCanExecute()
+        {
+            return packets.Count != 0;
         }
     }
 }

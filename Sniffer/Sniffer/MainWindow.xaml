@@ -6,13 +6,16 @@
         xmlns:ie="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:Sniffer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="248.667" Width="601">
+        Background="#8E9DA1"
+        BorderThickness="3"
+        BorderBrush="Black"
+        Title="Adapters" Height="339.167" Width="625" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListBox Name="List" Margin="10,10,332,10" ItemsSource="{Binding AdaptersList}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding FriendlyName}"/>
+                        <TextBlock Text="{Binding FriendlyName}" FontSize="14"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -22,9 +25,7 @@
                 </ie:EventTrigger>
             </ie:Interaction.Triggers>
         </ListBox>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="266,10,10,52">
-            <TextBlock TextWrapping="Wrap" Margin="5" Text="{Binding Details}"/>
-        </Border>
-        <Button Content="Capture" Margin="266,171,10,10" Command="{Binding CaptureCommand}"/>
+        <TextBox Margin="290,10,10,63" Text="{Binding Details}" FontSize="14"/>
+        <Button Content="Capture" Margin="290,246,10,10" Command="{Binding CaptureCommand}" FontSize="18"/>
     </Grid>
 </Window>

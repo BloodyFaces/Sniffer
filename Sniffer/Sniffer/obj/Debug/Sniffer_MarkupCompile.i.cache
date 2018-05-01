@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\Sniffer\Sniffer\Sniffer\App.xaml
-2-1652964596
+9-2077772786
 
-172062368376
+171467790470
 17-1624818984
-MainWindow.xaml;Views\CaptureView.xaml;
+BureauBlack.xaml;BureauBlue.xaml;ExpressionDark.xaml;ExpressionLight.xaml;MainWindow.xaml;ShinyBlue.xaml;ShinyRed.xaml;Views\CaptureView.xaml;WhistlerBlue.xaml;
 
-True
+False
 

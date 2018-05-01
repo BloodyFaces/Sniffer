@@ -21,3 +21,12 @@ E:\Sniffer\Sniffer\Sniffer\bin\Debug\PacketDotNet.dll
 E:\Sniffer\Sniffer\Sniffer\bin\Debug\SharpPcap.dll
 E:\Sniffer\Sniffer\Sniffer\obj\Debug\Views\CaptureView.g.cs
 E:\Sniffer\Sniffer\Sniffer\obj\Debug\Views\CaptureView.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\Sniffer.csproj.CopyComplete
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\BureauBlack.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\BureauBlue.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\ExpressionDark.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\ExpressionLight.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\ShinyBlue.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\ShinyRed.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\WhistlerBlue.baml
+E:\Sniffer\Sniffer\Sniffer\obj\Debug\App.baml

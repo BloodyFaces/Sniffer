@@ -6,14 +6,29 @@
         xmlns:ie="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:Sniffer.Views"
         mc:Ignorable="d"
-        Title="CaptureView" Height="800" Width="1280">
+        BorderThickness="3"
+        BorderBrush="Black"
+        Background="#8E9DA1"
+        Title="CaptureView" Height="800" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox Name="List" Margin="10,10,10,373" ItemsSource="{Binding Packets}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <ListBox Name="List" Margin="36,56,616,317" ItemsSource="{Binding Packets}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Data}"/>
-                    </StackPanel>
+                    <Grid Margin="0,2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition  />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Position}" FontSize="24" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Length}" FontSize="24" Grid.Column="2"/>
+                        <TextBlock Text="{Binding Time}" FontSize="24" Grid.Column="4"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ie:Interaction.Triggers>
@@ -22,7 +37,10 @@
                 </ie:EventTrigger>
             </ie:Interaction.Triggers>
         </ListBox>
-        <Button Content="Start capturing" HorizontalAlignment="Left" Margin="819,401,0,0" VerticalAlignment="Top" Width="219" Height="70" Command="{Binding CaptureStartCommand}"/>
-        <Button Content="Stop capturing" HorizontalAlignment="Left" Margin="1043,401,0,0" VerticalAlignment="Top" Width="219" Height="70" Command="{Binding CaptureStopCommand}"/>
+        <TextBox TextWrapping="Wrap" Margin="36,457,616,67" Text="{Binding Details}" IsReadOnly="True" FontSize="24"/>
+        <Button Content="Start capturing" HorizontalAlignment="Left" Margin="808,628,0,0" VerticalAlignment="Top" Width="201" Height="70" Command="{Binding CaptureStartCommand}" FontSize="24"/>
+        <Button Content="Stop capturing" HorizontalAlignment="Left" Margin="1014,628,0,0" VerticalAlignment="Top" Width="211" Height="70" Command="{Binding CaptureStopCommand}" FontSize="24"/>
+        <TextBox HorizontalAlignment="Left" Height="567" Margin="661,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="564" Text="{Binding HexDetails}" IsReadOnly="True" FontSize="14"/>
+        <Button Content="Clean" HorizontalAlignment="Left" Margin="661,628,0,0" VerticalAlignment="Top" Width="142" Height="70" Command="{Binding CleanCommand}" FontSize="24"/>
     </Grid>
 </Window>
